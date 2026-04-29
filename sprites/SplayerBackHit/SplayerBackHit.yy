@@ -1,11 +1,11 @@
 {
   "$GMSprite":"v2",
   "%Name":"SplayerBackHit",
-  "bboxMode":0,
+  "bboxMode":2,
   "bbox_bottom":45,
   "bbox_left":24,
   "bbox_right":38,
-  "bbox_top":27,
+  "bbox_top":34,
   "collisionKind":1,
   "collisionTolerance":0,
   "DynamicTexturePage":false,

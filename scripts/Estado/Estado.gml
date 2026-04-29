@@ -29,9 +29,25 @@ function roda_estado() {
 
 function troca_estado(_estado) {
 	//finaliza o estado atual
-	_estado.finaliza();
+	estado_atual.finaliza();
 	//rodando proximo estado 
 	estado_atual = _estado;
 	//inicia proximo estado 
 	estado_atual.inicia();
+}
+
+
+
+//define Sprite 
+function define_sprite(_dir = 0, sprite_side, sprite_back, sprite_front){
+    var _sprite;
+    
+    switch (_dir)
+    {
+        case 0:  _sprite = sprite_side; break;  // direita
+        case 1:  _sprite = sprite_back; break;  // cima
+        case 2:  _sprite = sprite_side; break;  // esquerda (usa mesmo sprite lado)
+        case 3:  _sprite = sprite_front; break; // baixo
+    }
+    return _sprite;
 }

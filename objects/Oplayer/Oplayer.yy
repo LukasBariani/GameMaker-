@@ -35,6 +35,9 @@
     "name":"SplayerFrontIdle",
     "path":"sprites/SplayerFrontIdle/SplayerFrontIdle.yy",
   },
-  "spriteMaskId":null,
+  "spriteMaskId":{
+    "name":"SplayerFrontIdle",
+    "path":"sprites/SplayerFrontIdle/SplayerFrontIdle.yy",
+  },
   "visible":true,
 }
