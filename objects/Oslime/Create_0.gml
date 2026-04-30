@@ -16,6 +16,8 @@ target = Oplayer;
 spd = 1.5;
 hsp = 0;
 vsp = 0;
+hit = false;
+
 
 // combate
 hp = 3;
@@ -24,6 +26,7 @@ detect_range = 120;
 
 attack_cooldown = 60;
 attack_timer = 0;
+attack_timer = attack_cooldown; 
 
 // knockback
 knockback = 0;
@@ -76,33 +79,29 @@ function state_attack() {
     vsp = 0;
 
     sprite_index = SslimeAttack;
-    image_speed = 0.5;
+    image_speed = 1;
 
     attack_timer--;
+	
 
     if (attack_timer <= 0) {
         
         attack_timer = attack_cooldown;
 
-        // dano no player
         if (point_distance(x, y, target.x, target.y) < attack_range) {
-            with (target) {
-                hp -= 1;
-            }
+           with (target) {
+				 take_damage(1, point_direction(other.x, other.y, x, y));
+			}
         }
     }
 
-    // voltar a perseguir se afastar
     if (point_distance(x, y, target.x, target.y) > attack_range) {
         state = SlimeState.CHASE;
     }
-
-
-
+} 
 function state_hurt() {
     
     sprite_index = SslimeHurt;
-    image_speed = 1;
 
     var _kx = lengthdir_x(knockback, knock_dir);
     var _ky = lengthdir_y(knockback, knock_dir);
@@ -126,4 +125,24 @@ function state_dead() {
         instance_destroy();
     }
 }
+
+
+
+
+function take_damage(_amount, _dir) {
+
+    if (state == SlimeState.DEAD) exit;
+    if (state == SlimeState.HURT) exit; // 🔥 evita spam
+
+    hp -= _amount;
+
+    if (hp <= 0) {
+        state = SlimeState.DEAD;
+        exit;
+    }
+
+    knockback = 6;
+    knock_dir = _dir;
+
+    state = SlimeState.HURT;
 }
